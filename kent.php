@@ -14,7 +14,7 @@ function StudentInformation($name, $courseCode, $quizScores, $examScores)
 
 $studentData = storeStudentInfo($name, $courseCode, $quizScores, $examScores);
 
-$name = "randly";
+$name = "vince pugi";
 $courseCode = "CICS";
 $quizScores = array(20, 20, 20, 20, 20);
 $examScores = array(50, 50, 50);
