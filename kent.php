@@ -1,6 +1,7 @@
 <?php
 
-function StudentInformation($name, $courseCode, $quizScores, $examScores) {
+function StudentInformation($name, $courseCode, $quizScores, $examScores) 
+{
     $studentInfo = array(
         "Name" => $name,
         "CourseCode" => $courseCode,
@@ -13,7 +14,7 @@ function StudentInformation($name, $courseCode, $quizScores, $examScores) {
 
 $studentData = storeStudentInfo($name, $courseCode, $quizScores, $examScores);
 
-$name = "Sir vince";
+$name = "randly";
 $courseCode = "CICS";
 $quizScores = array(20, 20, 20, 20, 20);
 $examScores = array(50, 50, 50);
@@ -25,62 +26,57 @@ echo "Quiz Scores: " . implode(", ", $studentData['QuizScores']) . "<br>";
 echo "Exam Scores: " . implode(", ", $studentData['ExamScores']) . "<br>";
 
 
-
-function QuizScores($quizScores)
+function calculateAverageQuizScore($quizScores) 
 {
+    // Calculate the total score of all quizzes
+    $totalQuizScore = array_sum($quizScores);
 
-$totalScore = array_sum($quizScores);
-//total quiz score , 5 quizzes is 50 points in total
+    // Calculate the average score of all quizzes
+    $averageQuizScore = $totalQuizScore / count($quizScores);
 
-$averageScore = $totalScore / 5;
-
-return $averageScore;
-
+    return $averageQuizScore;
 }
 
-
-
-function ExamScores($examScores)
+function calculateAverageExamScore($examScores) 
 {
-    $totalScore = array_sum($examScores)
-    // the total exam score is perfect, 3 exams total 150 points
+    // Calculate the total score of all exams
+    $totalExamScore = array_sum($examScores);
 
-    $averageExamScore = $totalScore / 3;
+    // Calculate the average score of all exams
+    $averageExamScore = $totalExamScore / count($examScores);
 
     return $averageExamScore;
-
 }
 
 
-
-function calculateFinalGrade($quizWeight, $examWeight) 
+function calculateFinalGrade($quizAverage, $examAverage)
 {
-    
-    $weightedQuizScore = 10 * (40 / 100);
-    $weightedExamScore = 50 * (60 / 100);
+    $quizWeight = 40;
+    $examWeight = 60;
 
+    $weightedQuizScore = calculateWeightedScore($quizAverage, $quizWeight);
+    $weightedExamScore = calculateWeightedScore($examAverage, $examWeight);
+// formula for this is average * (the weight/100)
     // Calculate final grade
     $finalGrade = $weightedQuizScore + $weightedExamScore;
 
     return $finalGrade;
 }
 
+$quizAverage = 20;
+$examAverage = 50;
 
+$studentData = [
+    'Name' => 'Student Name',
+    'CourseCode' => 'Course Code'
+];
 
+$finalGrade = calculateFinalGrade($quizAverage, $examAverage);
 
 echo "Student Information:<br>";
-echo "Name: " . $studentData['Name'] . "<br>";
-echo "Course Code: " . $studentData['CourseCode'] . "<br>";
-echo "Final Grade: " . $finalGrade;
-
-
-
-
-
-
-
-
-
+echo "Name: ". $studentData['Name']. "<br>";
+echo "Course Code: ". $studentData['CourseCode']. "<br>";
+echo "Final Grade: ". $finalGrade;
 
 
 
